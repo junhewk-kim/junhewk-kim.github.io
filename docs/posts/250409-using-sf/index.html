@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="김준혁">
-<meta name="dcterms.date" content="2025-04-08">
+<meta name="dcterms.date" content="2025-04-09">
 
-<title>Quarto와 Github Pages로 블로그 빨리 만들기 – junhewk-kim.github.io</title>
+<title>index – junhewk-kim.github.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -115,9 +149,11 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Quarto와 Github Pages로 블로그 빨리 만들기</h1>
+      <h1 class="title">index</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">news</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">code</div>
+                <div class="quarto-category">lecture</div>
               </div>
                   </div>
   </div>
@@ -135,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 8, 2025</p>
+        <p class="date">April 9, 2025</p>
       </div>
     </div>
     
@@ -154,136 +190,85 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="블로그-제작의-변" class="level2">
-<h2 class="anchored" data-anchor-id="블로그-제작의-변">블로그 제작의 변</h2>
-<p>새로 블로그를 시작하기로 했습니다(이전 블로그에겐 미안하지만…) 블로그 작업에 있어서 고려한 점은 다음과 같습니다.</p>
-<ul>
-<li>코드(R/Python)이나 LLM 프롬프트를 올려 놓을 공간이 있었으면 좋겠다.</li>
-<li>안 올려놓으면 여기저기 돌아다니다가 사라지는데, 나중에 비슷한 작업을 할 때 다시 찾아야 한다.</li>
-<li>주로 업무에 활용하는 코드/프롬프트를 올려 놓으면 다른 사람들한테도 도움이 될 것 같다.</li>
-</ul>
-<p>해서 만들기 시작했지만, 이전(지난번엔 Jekyll에 plugin 붙이고 하는 작업을 열심히 했던 것 같습니다)처럼 작업을 위한 툴을 하나하나 배우거나 깔 시간은 없어서, 빠르게 만들 수 있는 툴을 찾아보니 Quarto[https://quarto.org/]로 작업을 하는 방식이 있더라고요. 어차피 제가 코드를 올릴 만한 것들은 주로 R 작업물일테니(Python은 굳이 제가…?), RStudio에서 Quarto를 돌려서 만드는 작업을 해봐야 겠다고 생각했습니다. 이런저런 오류를 거쳐서 실제 올리는 데까지는 10분 정도 걸렸네요. 만들어서 올리는 내용이 하나로 정리되어 있는 것 같지 않아서 여기까지 작업을 정리합니다.</p>
-</section>
-<section id="github-pages-만들기" class="level2">
-<h2 class="anchored" data-anchor-id="github-pages-만들기">Github Pages 만들기</h2>
-<p>물론 Github Docs[https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site]에 엄청 잘 정리되어 있지만, 순서만 다시 써봅니다.</p>
-<ol type="1">
-<li>Github 가입</li>
-<li>페이지 오른쪽 위 +를 눌러 New repository를 선택</li>
-<li>Owner에 원하는 계정 선택</li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="1.png" class="img-fluid figure-img"></p>
-<figcaption>Repository name에 주소 넣기: <code>[계정이름].github.io</code> 로 만들면 가장 단순(다른 이름으로 넣으면 <code>[계정이름].github.io/[설정이름]</code>이 되므로 복잡함)</figcaption>
-</figure>
-</div></li>
-<li>Visibility는 Public</li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="2.png" class="img-fluid figure-img"></p>
-<figcaption>README.md 파일 포함(체크박스)</figcaption>
-</figure>
-</div></li>
-<li>Create repository</li>
-</ol>
-<p>[계정이름].github.io 레포지토리로 이동</p>
-<ol type="1">
-<li>상단 메뉴 마지막 Settings 클린</li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="4.png" class="img-fluid figure-img"></p>
-<figcaption>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</figcaption>
-</figure>
-</div></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="5.png" class="img-fluid figure-img"></p>
-<figcaption>[계정이름].github.io로 주소 만들었으면 자동으로 Github Pages가 연결되어 있음: Visit site 누르면 페이지 확인 가능</figcaption>
-</figure>
-</div></li>
-</ol>
-<section id="quarto-설정" class="level3">
-<h3 class="anchored" data-anchor-id="quarto-설정">Quarto 설정</h3>
-<p><code>Quarto</code>는 이전 Bookdown, distill 패키지에 이어 여러 플랫폼에서 마크다운 기반 출력물을 만들어 내는 서비스라고 해요. 최근 이쪽에 관심을 끄고 살았더니 쓰던 패키지들이 다 새로운 패키지로 갈아 엎어졌네요(제 패키지도 다시 작업을 해야 하나 봅니다). RStudio 상에서 쉽게 페이지 만드는 작업을 지원합니다.</p>
-<p>먼저 R과 RStudio를 설치한 다음, Quarto[https://quarto.org/docs/get-started/]에 가서 quarto도 받아 설치합니다.</p>
-<ol type="1">
-<li>RStudio - File - New Project 클릭</li>
-<li>New Directory - Quarto Blog 선택</li>
-<li>디렉토리 정하고 아래 Create a git repository, Use renv with this project 선택(체크박스)</li>
-<li>Create Project</li>
-</ol>
-<p>그러면 새로 프로젝트가 만들어지고 기본 파일이 다 설정됩니다. 블로그 만드는 기본 틀은 이미 완성이 된 건데요, 여기에서 바로 Github 업로드를 위해 파일을 수정합니다. <code>_quarto.yml</code>의 시작 부분을 다음과 같이 수정합니다.</p>
-<pre><code>project:
-    type: website
-    output-dir: docs</code></pre>
-<p>다음은 publish - github push입니다.</p>
-<ol type="1">
-<li>terminal을 열어서 project 디렉토리로 이동</li>
-<li><code>quarto render</code>로 지금 내용을 html 출력</li>
-<li><code>git init</code></li>
-<li><code>git add docs</code></li>
-<li><code>git commit -m "First commit"</code></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="3.png" class="img-fluid figure-img"></p>
-<figcaption><code>git remote add origin [레포지토리 https 주소]</code></figcaption>
-</figure>
-</div></li>
-<li><code>git branch -m master main</code> (계속 master로 올라가서 변경)</li>
-<li><code>git config pull.ff only</code> (fast-forward로 설정해서 main 병합 해결)</li>
-<li><code>git push -f origin main</code></li>
-<li>(git 인증 관련: classic token으로 작업하는 방식이 단순함)</li>
-</ol>
-<ul>
-<li>이전 인증 리셋: <code>git config --global --unset credential.helper</code></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="6.png" class="img-fluid figure-img"></p>
-<figcaption>Github - Settings - Developer settings</figcaption>
-</figure>
-</div></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="7.png" class="img-fluid figure-img"></p>
-<figcaption>Personal access tokens - Tokens (classic)</figcaption>
-</figure>
-</div></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="8.png" class="img-fluid figure-img"></p>
-<figcaption>우상단 Generate new token - Generate new token (classic)</figcaption>
-</figure>
-</div></li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="9.png" class="img-fluid figure-img"></p>
-<figcaption>Note에 적당한 이름 넣기 - Expiration 기간 설정 - repo 체크박스 설정</figcaption>
-</figure>
-</div></li>
-<li>만들어진 token이 비밀번호: <code>git push</code> 실행했을 때 Username (계정 이름) 넣고 Password에 생성한 token 넣으면 됨</li>
-</ul>
-<p>여기까지 하면 repository에 <code>docs</code> 디렉토리가 올라갑니다. 다음,</p>
-<ol type="1">
-<li>상단 메뉴 마지막 Settings 클린</li>
-<li>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</li>
-<li><div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="10.png" class="img-fluid figure-img"></p>
-<figcaption>Branch에서 main - /docs로 드롭다운 메뉴 변경 후 Save</figcaption>
-</figure>
-</div></li>
-</ol>
-<p>이러면 [계정이름].github.io에 publish한 Quarto blog를 올릴 준비가 끝났습니다!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.13.0, GDAL 3.5.3, PROJ 9.5.1; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+✔ purrr     1.0.4     </code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: sysfonts
+Loading required package: showtextdb</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">'.shp file location'</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>clinicians <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">'excel file from 통계청'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `ctprvn' from data source 
+  `/Users/jk/Downloads/ctprvn_20230729/ctprvn.shp' using driver `ESRI Shapefile'
+Simple feature collection with 17 features and 3 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: 746110.3 ymin: 1458754 xmax: 1387950 ymax: 2068444
+CRS:           NA</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>New names:
+• `` -&gt; `...1`</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>map<span class="sc">$</span>CTP_KOR_NM <span class="ot">&lt;-</span> <span class="fu">iconv</span>(map<span class="sc">$</span>CTP_KOR_NM, <span class="at">from =</span> <span class="st">'EUC-KR'</span>, <span class="at">to =</span> <span class="st">'UTF-8'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>clinicians<span class="sc">$</span>...<span class="dv">1</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"전체"</span>, map<span class="sc">$</span>CTP_KOR_NM)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>map_value <span class="ot">&lt;-</span> <span class="fu">left_join</span>(map, clinicians <span class="sc">%&gt;%</span> <span class="fu">select</span>(...<span class="dv">1</span>, 의사_소계, 치과의사_소계, 한의사_소계) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">CTP_KOR_NM =</span> ...<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Joining with `by = join_by(CTP_KOR_NM)`</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>map_value <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_sf_label(aes(label = CTP_KOR_NM)) +</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> 의사_소계, <span class="at">vjust=</span><span class="sc">-</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> 치과의사_소계)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_sf_text(aes(label = 한의사_소계, vjust=-1)) +</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_family =</span> <span class="st">"Pretendard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="thateasy.png" class="img-fluid figure-img"></p>
-<figcaption>That Easy</figcaption>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Numbers of Doctors and Dentists by Jurisdictions</figcaption>
 </figure>
+</div>
+</div>
 </div>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
