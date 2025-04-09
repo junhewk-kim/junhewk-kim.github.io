@@ -9,7 +9,7 @@
 <meta name="author" content="김준혁">
 <meta name="dcterms.date" content="2025-04-09">
 
-<title>index – junhewk-kim.github.io</title>
+<title>R: sf package를 통한 지도 시각화 – junhewk-kim.github.io</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">index</h1>
+      <h1 class="title">R: sf package를 통한 지도 시각화</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">R</div>
                 <div class="quarto-category">code</div>
@@ -190,6 +190,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+<section id="r에서-지도-그리기" class="level2">
+<h2 class="anchored" data-anchor-id="r에서-지도-그리기">R에서 지도 그리기</h2>
+<p>이전에 지도를 그릴 때는 <code>rgdal</code> 패키지를 사용했었죠. 저도 이전에는 당연히 <code>rgdal</code> - <code>readOGR</code>로 .shp 파일을 불러와서 시각화하는 방식으로 작업했는데, 한동안 지도 관련 시각화할 일이 없다보니 <code>rgdal</code> 패키지가 심지어 CRAN repository에서 빠졌다는 것도 몰랐습니다(오랫동안 보수되지 않으면 패키지가 자동으로 빠집니다).</p>
+<p>찾아보니 몇몇 패키지가 R에 <code>GDAL</code>을 연결해 작업할 수 있도록 지원하고 있더라고요. 오늘은 새 패키지인 <code>sf</code>를 소개하고, 이를 통해 간단히 한국 지도 + 레이블을 올리는 작업을 설명합니다.</p>
+<p>복잡하게 소개할 시간도, 능력도 되지 않기 때문에 이번엔 아주 간단히만 설명하고, 나중에 더 보강하는 방식으로 접근하려 해요.</p>
+</section>
+<section id="sf-package" class="level2">
+<h2 class="anchored" data-anchor-id="sf-package">sf package</h2>
+<p><code>sf</code>는 simple features의 약자로군요. <a href="https://r-spatial.github.io/sf/">Simple Features of R</a> 홈페이지에서 관련 내용을 확인하실 수 있어요. <code>GEOS</code>, <code>GDAL</code>, <code>PROJ</code>의 R 인터페이스를 제공합니다.</p>
+<p>이전 <code>rgdal</code>을 쓰면 그림 그리는 것 다음 작업이 꽤 귀찮았는데(레이블 별로 로케이션 잡고 정리해서 텍스트 위치 부여를 추가하는 작업이 필요했지요) 아주 간편해졌어요! 아래 실례로 바로 보시죠.</p>
+</section>
+<section id="sf-package로-한국-지도-그리기-레이블-추가" class="level2">
+<h2 class="anchored" data-anchor-id="sf-package로-한국-지도-그리기-레이블-추가">sf package로 한국 지도 그리기 + 레이블 추가</h2>
+<p>먼저 관련 패키지를 불러옵니다. <code>readxl</code>이 붙어있는 것은 제가 통계청에서 다운로드받은 자료를 붙여서 썼기 때문입니다. <code>showtext</code>는 R에 추가 폰트 불러오는 작업을 간단하게 지원하는 패키지지요!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -217,9 +231,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Loading required package: showtextdb</code></pre>
 </div>
 </div>
+<p><code>showtext_auto</code>로 폰트를 불러옵니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>자료는 두 가지를 받았어요.</p>
+<ol type="1">
+<li><a href="http://www.gisdeveloper.co.kr/?p=2332">대한민국 최신 행정구역(SHP) 다운로드</a></li>
+</ol>
+<p>행정구역 공간 데이터를 제공하는 홈페이지입니다. 최근 자료는 새로 등록/로그인이 필요해서, 그냥 2023년 7월 자료를 받는 것으로 갈음했습니다(제 목적에서 엄청 자세한 자료가 필요하지 않아서요).</p>
+<ol start="2" type="1">
+<li><a href="https://kosis.kr/statHtml/statHtml.do?sso=ok&amp;returnurl=https%3A%2F%2Fkosis.kr%3A443%2FstatHtml%2FstatHtml.do%3FtblId%3DDT_HIRA4A%26orgId%3D354%26">시군구별 의료인력현황</a></li>
+</ol>
+<p>제가 만들려고 했던 자료가 시도별 의사/치과의사 수 지도였어요. 대학 강의자료 만드는 중이었지요. 통계청 자료를 엑셀 파일로 받아서 간단히 가공했습니다(원자료가 세 차원으로 column name을 써놔서 다 날리고 단순화했어요).</p>
+<p>자료를 로드합니다. 그냥 <code>st_read</code>로 shp 파일을 불러오면 바로 붙습니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>map <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">'.shp file location'</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>clinicians <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">'excel file from 통계청'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -239,9 +264,11 @@ CRS:           NA</code></pre>
 • `` -&gt; `...1`</code></pre>
 </div>
 </div>
+<p>다 좋은데 자료형에서 <code>CTP_KOR_NM</code> 열(이전에 작업해 보신 분들은 익숙하신, 한글 지역명이 들어 있는 열입니다)이 인코딩이 깨집니다. <code>iconv</code>로 수정했습니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>map<span class="sc">$</span>CTP_KOR_NM <span class="ot">&lt;-</span> <span class="fu">iconv</span>(map<span class="sc">$</span>CTP_KOR_NM, <span class="at">from =</span> <span class="st">'EUC-KR'</span>, <span class="at">to =</span> <span class="st">'UTF-8'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>두 데이터 프레임을 지역명 기준으로 병합했어요. 지역 순서가 같아서(강원도만 빼고: 엑셀에서 그냥 옮겨 붙이기로 작업했습니다) 그냥 shp 데이터의 지역명 열을 그대로 옮겨 붙인 다음, <code>left_join</code>으로 간단히 붙입니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>clinicians<span class="sc">$</span>...<span class="dv">1</span> <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"전체"</span>, map<span class="sc">$</span>CTP_KOR_NM)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>map_value <span class="ot">&lt;-</span> <span class="fu">left_join</span>(map, clinicians <span class="sc">%&gt;%</span> <span class="fu">select</span>(...<span class="dv">1</span>, 의사_소계, 치과의사_소계, 한의사_소계) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">CTP_KOR_NM =</span> ...<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -249,6 +276,7 @@ CRS:           NA</code></pre>
 <pre><code>Joining with `by = join_by(CTP_KOR_NM)`</code></pre>
 </div>
 </div>
+<p>바로 그림! 엄청 쉬워졌지요 ㅠㅠ 이전에는 여기에서 spacial 값을 받아서 텍스트 위치를 다시 잡아줬어야 했는데, <code>sf</code>는 ggplot에서 <code>sf_label</code>과 <code>sf_text</code>를 지원합니다! <code>sf_label</code>에 레이블로 쓸 값 넣어 주시면 바로 중간 위치에 붙어요. modern package라더니, 정말 모던합니다.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>map_value <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
@@ -267,8 +295,10 @@ CRS:           NA</code></pre>
 </div>
 </div>
 </div>
+<p>지도 + 레이블 그림이 5분만에 완성되었습니다!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
