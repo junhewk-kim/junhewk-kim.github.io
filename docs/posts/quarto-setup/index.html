@@ -171,27 +171,37 @@ ul.task-list li input[type="checkbox"] {
 <li>Github 가입</li>
 <li>페이지 오른쪽 위 +를 눌러 New repository를 선택</li>
 <li>Owner에 원하는 계정 선택</li>
-<li>Repository name에 주소 넣기: <code>[계정이름].github.io</code> 로 만들면 가장 단순(다른 이름으로 넣으면 <code>[계정이름].github.io/[설정이름]</code>이 되므로 복잡함)</li>
-</ol>
-<p>!()[1.png]</p>
-<ol start="5" type="1">
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="1.png" class="img-fluid figure-img"></p>
+<figcaption>Repository name에 주소 넣기: <code>[계정이름].github.io</code> 로 만들면 가장 단순(다른 이름으로 넣으면 <code>[계정이름].github.io/[설정이름]</code>이 되므로 복잡함)</figcaption>
+</figure>
+</div></li>
 <li>Visibility는 Public</li>
-<li>README.md 파일 포함(체크박스)</li>
-</ol>
-<p>!()[2.png]</p>
-<ol start="7" type="1">
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="2.png" class="img-fluid figure-img"></p>
+<figcaption>README.md 파일 포함(체크박스)</figcaption>
+</figure>
+</div></li>
 <li>Create repository</li>
 </ol>
 <p>[계정이름].github.io 레포지토리로 이동</p>
 <ol type="1">
 <li>상단 메뉴 마지막 Settings 클린</li>
-<li>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="4.png" class="img-fluid figure-img"></p>
+<figcaption>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</figcaption>
+</figure>
+</div></li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="5.png" class="img-fluid figure-img"></p>
+<figcaption>[계정이름].github.io로 주소 만들었으면 자동으로 Github Pages가 연결되어 있음: Visit site 누르면 페이지 확인 가능</figcaption>
+</figure>
+</div></li>
 </ol>
-<p>!()[4.png]</p>
-<ol start="3" type="1">
-<li>[계정이름].github.io로 주소 만들었으면 자동으로 Github Pages가 연결되어 있음: Visit site 누르면 페이지 확인 가능</li>
-</ol>
-<p>!()[5.png]</p>
 <section id="quarto-설정" class="level3">
 <h3 class="anchored" data-anchor-id="quarto-설정">Quarto 설정</h3>
 <p><code>Quarto</code>는 이전 Bookdown, distill 패키지에 이어 여러 플랫폼에서 마크다운 기반 출력물을 만들어 내는 서비스라고 해요. 최근 이쪽에 관심을 끄고 살았더니 쓰던 패키지들이 다 새로운 패키지로 갈아 엎어졌네요(제 패키지도 다시 작업을 해야 하나 봅니다). RStudio 상에서 쉽게 페이지 만드는 작업을 지원합니다.</p>
@@ -213,10 +223,12 @@ ul.task-list li input[type="checkbox"] {
 <li><code>git init</code></li>
 <li><code>git add docs</code></li>
 <li><code>git commit -m "First commit"</code></li>
-<li><code>git remote add origin [레포지토리 https 주소]</code></li>
-</ol>
-<p>!()[3.png]</p>
-<ol start="7" type="1">
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="3.png" class="img-fluid figure-img"></p>
+<figcaption><code>git remote add origin [레포지토리 https 주소]</code></figcaption>
+</figure>
+</div></li>
 <li><code>git branch -m master main</code> (계속 master로 올라가서 변경)</li>
 <li><code>git config pull.ff only</code> (fast-forward로 설정해서 main 병합 해결)</li>
 <li><code>git push -f origin main</code></li>
@@ -224,31 +236,43 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <ul>
 <li>이전 인증 리셋: <code>git config --global --unset credential.helper</code></li>
-<li>Github - Settings - Developer settings</li>
-</ul>
-<p>!()[6.png]</p>
-<ul>
-<li>Personal access tokens - Tokens (classic)</li>
-</ul>
-<p>!()[7.png]</p>
-<ul>
-<li>우상단 Generate new token - Generate new token (classic)</li>
-</ul>
-<p>!()[8.png]</p>
-<ul>
-<li>Note에 적당한 이름 넣기 - Expiration 기간 설정 - repo 체크박스 설정</li>
-</ul>
-<p>!()[9.png]</p>
-<ul>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="6.png" class="img-fluid figure-img"></p>
+<figcaption>Github - Settings - Developer settings</figcaption>
+</figure>
+</div></li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="7.png" class="img-fluid figure-img"></p>
+<figcaption>Personal access tokens - Tokens (classic)</figcaption>
+</figure>
+</div></li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="8.png" class="img-fluid figure-img"></p>
+<figcaption>우상단 Generate new token - Generate new token (classic)</figcaption>
+</figure>
+</div></li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="9.png" class="img-fluid figure-img"></p>
+<figcaption>Note에 적당한 이름 넣기 - Expiration 기간 설정 - repo 체크박스 설정</figcaption>
+</figure>
+</div></li>
 <li>만들어진 token이 비밀번호: <code>git push</code> 실행했을 때 Username (계정 이름) 넣고 Password에 생성한 token 넣으면 됨</li>
 </ul>
 <p>여기까지 하면 repository에 <code>docs</code> 디렉토리가 올라갑니다. 다음,</p>
 <ol type="1">
 <li>상단 메뉴 마지막 Settings 클린</li>
 <li>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</li>
-<li>Branch에서 main - /docs로 드롭다운 메뉴 변경 후 Save</li>
+<li><div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="10.png" class="img-fluid figure-img"></p>
+<figcaption>Branch에서 main - /docs로 드롭다운 메뉴 변경 후 Save</figcaption>
+</figure>
+</div></li>
 </ol>
-<p>!()[10.png]</p>
 <p>이러면 [계정이름].github.io에 publish한 Quarto blog를 올릴 준비가 끝났습니다!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
