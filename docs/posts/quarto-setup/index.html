@@ -220,13 +220,35 @@ ul.task-list li input[type="checkbox"] {
 <li><code>git branch -m master main</code> (계속 master로 올라가서 변경)</li>
 <li><code>git config pull.ff only</code> (fast-forward로 설정해서 main 병합 해결)</li>
 <li><code>git push -f origin main</code></li>
+<li>(git 인증 관련: classic token으로 작업하는 방식이 단순함)</li>
 </ol>
+<ul>
+<li>이전 인증 리셋: <code>git config --global --unset credential.helper</code></li>
+<li>Github - Settings - Developer settings</li>
+</ul>
+<p>!()[6.png]</p>
+<ul>
+<li>Personal access tokens - Tokens (classic)</li>
+</ul>
+<p>!()[7.png]</p>
+<ul>
+<li>우상단 Generate new token - Generate new token (classic)</li>
+</ul>
+<p>!()[8.png]</p>
+<ul>
+<li>Note에 적당한 이름 넣기 - Expiration 기간 설정 - repo 체크박스 설정</li>
+</ul>
+<p>!()[9.png]</p>
+<ul>
+<li>만들어진 token이 비밀번호: <code>git push</code> 실행했을 때 Username (계정 이름) 넣고 Password에 생성한 token 넣으면 됨</li>
+</ul>
 <p>여기까지 하면 repository에 <code>docs</code> 디렉토리가 올라갑니다. 다음,</p>
 <ol type="1">
 <li>상단 메뉴 마지막 Settings 클린</li>
 <li>좌측 열 메뉴 “Code and automation” 중 “Pages” 선택</li>
 <li>Branch에서 main - /docs로 드롭다운 메뉴 변경 후 Save</li>
 </ol>
+<p>!()[10.png]</p>
 <p>이러면 [계정이름].github.io에 publish한 Quarto blog를 올릴 준비가 끝났습니다!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
